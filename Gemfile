@@ -54,3 +54,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "react-rails", "~> 2.6"
 
 gem "httparty", "~> 0.18.1"
+
+gem "rspec-activemodel-mocks", "~> 1.1"

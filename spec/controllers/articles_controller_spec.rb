@@ -1,12 +1,14 @@
 require_relative './../../app/controllers/articles_controller.rb'
-require 'rails_helper'
+require_relative './../../app/models/article.rb'
 
-RSpec.describe ArticlesController do
+describe ArticlesController do
   context 'given articles are available from external api' do
+    let(:likes) { 5 }
+    let(:db_article) { stub_model Article, :id => 5, :likes => likes }
     let(:article) { { 
       title: 'Box of tea', 
       location: { distance: 26.3 },
-      reactions: { views: 15 },
+      reactions: { views: 15, likes: 1 },
       images: [{ files: { small: "https://imageurl.com" }}],
       user: { current_avatar: "https://userimage.com", first_name: 'Jean', rating: { rating: 5 } }
     }}
@@ -15,6 +17,7 @@ RSpec.describe ArticlesController do
 
     before(:each) do
       HTTParty.stub(:get).and_return(http_response)
+      Article.stub(:find_by).and_return(db_article)   
       get :index 
     end
 
@@ -40,6 +43,20 @@ RSpec.describe ArticlesController do
     it 'should provide article images' do
       returned_articles = JSON.parse(response.body, :symbolize_names => true)
       expect(returned_articles[0][:images]).to eq(articles[0][:images][0][:files])
+    end
+
+    it 'should retrieve stored likes from model for each article' do  
+      returned_articles = JSON.parse(response.body, :symbolize_names => true)
+      expect(returned_articles[0][:reactions][:likes]).to eq(likes)
+    end
+  end
+
+  context 'when article is posted with likes' do
+    it 'should create new article in db with likes' do
+      allow(Article).to receive(:add_like_or_create)
+      patch :update, params: { id: '5', likes: '10' }
+
+      expect(Article).to have_received(:add_like_or_create).with({ id: '5', likes: '10'})
     end
   end
 end
