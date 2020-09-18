@@ -1,6 +1,7 @@
 import React from 'react'
-import { ArticleView, Article } from './Article';
+import { ArticleView } from './Article';
 import styled from 'styled-components';
+import { Article } from '../services/olio-api';
 
 type ArticleListProps = {
   articles: Article[];
