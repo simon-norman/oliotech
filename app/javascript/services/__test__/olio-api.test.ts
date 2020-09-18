@@ -14,4 +14,13 @@ describe('Olio api', () => {
     const articles = await olioApi.getArticles();
     expect(articles).toEqual(articleData);
   });
+
+  test('Increment article likes', async () => {
+    const olioApi = new OlioApi(mockedAxios);
+    const id = '1';
+    const likes = 10;
+  
+    await olioApi.incrementLikes(id, likes);
+    expect(mockedAxios.patch.mock.calls[0]).toEqual([`/articles/${id}`, { likes }]);
+  });
 });

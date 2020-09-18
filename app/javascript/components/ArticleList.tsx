@@ -5,6 +5,7 @@ import { Article } from '../services/olio-api';
 
 type ArticleListProps = {
   articles: Article[];
+  onLike: (id: string, likes: number) => void;
 };
 
 export function ArticleList(props: ArticleListProps): JSX.Element {
@@ -14,6 +15,7 @@ export function ArticleList(props: ArticleListProps): JSX.Element {
         key={ article.id }
         isFirst={ index === 0 }
         article={ article }
+        onLike={ () => props.onLike(article.id, article.reactions.likes + 1) }
       />
     ))}
   </ArticlesContainer>;

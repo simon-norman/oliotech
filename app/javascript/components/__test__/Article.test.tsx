@@ -1,4 +1,4 @@
-import { render, screen, RenderResult } from '@testing-library/react';
+import { render, screen, RenderResult } from '@testing-library/react'
 import { ArticleView } from '../Article';
 import React from 'react';
 
@@ -8,9 +8,12 @@ describe('Article', () => {
   const numberOfViews = 200;
   const userRating = 4.5;
   const userName = 'Gina';
+  const likes = 5;
+  const onLike = jest.fn();
 
   function renderArticle(): RenderResult {
     return render(<ArticleView 
+      onLike={ onLike }
       article={ {
         id: '1',
         location: {
@@ -22,10 +25,14 @@ describe('Article', () => {
         title: articleTitleText,
         reactions: {
           views: numberOfViews,
+          likes,
         },
         user: {
           firstName: userName,
           rating: userRating,
+          avatar: {
+            small: 'https://images.com/userimage'
+          }
         },
       } }
     />);
@@ -52,5 +59,18 @@ describe('Article', () => {
   
   test('Show number of views', () => {
     expect(renderArticle().getByText(`${numberOfViews} views`)).toBeTruthy();
+  });
+
+  test('Show number of likes', () => {
+    renderArticle();
+    const likesView = screen.getByTestId('likes');
+    expect(likesView.textContent).toBe(`${likes}`);
+  });
+
+  test('Call on like callback when likes clicked', () => {
+    renderArticle();
+    const likesView = screen.getByTestId('likes-container');
+    likesView.click();
+    expect(onLike.mock.calls.length).toBe(1);
   });
 });
