@@ -47,6 +47,7 @@ const ArticleContainer = styled.section`
 `
 
 const ImageContainer = styled.div`
+  min-width: 33%;
   width: 33%;
   height: 250px;
   position: relative;
@@ -62,11 +63,16 @@ const ArticleInfoContainer = styled.section`
   display: flex;
   flex-direction: column;
   padding: 32px;
+  min-width: 0;
 `
 
 const Title = styled.h3`
   font-size: 2.4rem;
   font-weight: normal;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
   ${ removeDefaultTextStyles }
 `;
 
