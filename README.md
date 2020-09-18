@@ -15,7 +15,7 @@ CD into repo and run `yarn`
 
 Run `bundle install`
 
-Run `rake db:migrate` to set up the database
+Run `rake db:migrate` and `rails db:migrate RAILS_ENV=test` to set up the database
 
 ## To run app
 
