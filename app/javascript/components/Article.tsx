@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export type Article = {
   title: string;
+  id: string;
 }
 
 export type ArticleProps = {

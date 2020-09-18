@@ -9,6 +9,7 @@ describe('Article', () => {
     return render(<ArticleView 
       article={ {
         title: articleTitleText,
+        id: '1'
       } }
     />);
   }
