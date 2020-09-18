@@ -1,24 +1,30 @@
-# README
+# Tech Test
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an app for displaying a list of items that their owners wish to give away. Users can view   
+the items and 'like' them. 
 
-Things you may want to cover:
+The app is written with a Rails api and a React Typescript frontend, with a SQLite database.
 
-* Ruby version
+## To install
 
-* System dependencies
+Clone repo  
 
-* Configuration
+Ensure you have yarn, Ruby, Bundle, and Node installed
 
-* Database creation
+CD into repo and run `yarn`  
 
-* Database initialization
+Run `bundle install`
 
-* How to run the test suite
+Run `rake db:migrate` to set up the database
 
-* Services (job queues, cache servers, search engines, etc.)
+## To run app
 
-* Deployment instructions
+Run `./bin/webpack-dev-server` to compile the React app
 
-* ...
+Run `rails server -p 3000`
+
+Go to http://localhost:3000 to view
+
+## To run tests
+
+`bundle exec rspec --require rails_helper`
