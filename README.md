@@ -3,7 +3,7 @@
 This is an app for displaying a list of items that their owners wish to give away. Users can view   
 the items and 'like' them. 
 
-The app is written with a Rails api and a React Typescript frontend, with a SQLite database.
+The app is written with a Rails api and a React Typescript frontend, with a SQLite database. Tests in rspec and Jest for backend and frontend respectively. 
 
 ## To install
 
@@ -27,4 +27,6 @@ Go to http://localhost:3000 to view
 
 ## To run tests
 
-`bundle exec rspec --require rails_helper`
+Backend rails unit tests: `bundle exec rspec --require rails_helper`
+
+Frontend Jest unit tests: `yarn test`
